@@ -1,3 +1,27 @@
-body{
-    background-color: rgb(41, 173, 129);
+.bg-video {
+    position: absolute;
+    z-index: -2;
+    width: 100dvw;
+    height: 100dvh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+.video {
+    height: 100dvh;
+}
+
+.bg-video::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100dvh;
+    width: 100dvw;
+    background: linear-gradient(90deg,
+            rgba(0, 0, 0, 1) 0%,
+            rgba(0, 0, 0, 0.7) 50%,
+            rgba(0, 0, 0, 1) 100%
+        );
 }
