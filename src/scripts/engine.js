@@ -186,6 +186,10 @@ function init() {
 
 	drawCards(5, state.playerSides.computer);
 	drawCards(5, state.playerSides.player1);
+
+    const bmg = document.getElementById("bmg");
+    bmg.volume=0.2;
+    bmg.play();
 }
 
 init();
