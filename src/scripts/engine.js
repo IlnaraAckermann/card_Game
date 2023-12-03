@@ -44,7 +44,7 @@ const cardData = [
 	{
 		id: 2,
 		name: "Dark Magician",
-		type: "Paper",
+		type: "Scissors",
 		img: `${pathImg}magician.png`,
         winOf: [1],
         loseOf: [0],
@@ -65,17 +65,25 @@ async function createCardImage(randomIdCard, fieldSide) {
     cardImage.classList.add("card")
 
     if(fieldSide === playerSides.player1){
+        cardImage.addEventListener("mouseover", ()=>{
+            drawSelected(randomIdCard)
+        })
+        
         cardImage.addEventListener("click", ()=>{
             setCardsField(cardImage.getAttribute("data-id"))
         })
     }
 
-    cardImage.addEventListener("mouseover", ()=>{
-        drawSelected(IdCard)
-    })
+   
 
     return cardImage
 
+}
+
+async function drawSelected(index){
+    state.cardSprites.avatar.src = cardData[index].img;
+    state.cardSprites.name.innerText = cardData[index].name;
+    state.cardSprites.type.innerText = cardData[index].type;
 }
 
 async function drawCards(cardNumbers, fieldSide){
