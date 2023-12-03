@@ -1,7 +1,7 @@
 const state = {
-	socres: {
-		player: 0,
-		computer: 0,
+	score: {
+		playerScore: 0,
+		computerScore: 0,
 		scoreBox: document.getElementById("score_points"),
 	},
 	cardSprites: {
@@ -78,6 +78,28 @@ async function createCardImage(randomIdCard, fieldSide) {
     return cardImage
 }
 
+async function drawButton(text){
+    state.action.button.innerText=text;
+    state.action.button.style.display="block";
+}
+
+async function checkDuelResults(playerCardId, computerCardId){
+    let duelResult="EMPATE!"
+    let playerCard = cardData[playerCardId]
+
+    if(playerCard.winOf.includes(computerCardId)){
+        duelResult="GANHOU!"
+        state.score.playerScore++
+    }
+
+    if(playerCard.loseOf.includes(computerCardId)){
+        duelResult="PERDEU!"
+        state.score.computerScore++
+    }
+
+    return duelResult
+}
+
 async function removeAllCardsImages(){
     let {computerBox, player1Box} = state.playerSides;
     let imgElements = computerBox.querySelectorAll("img");
@@ -101,6 +123,10 @@ async function setCardsField(cardId){
 
     await updateScore();
     await drawButton(duelResult)
+}
+
+async function updateScore(){
+    state.score.scoreBox.innerText=`WIN ${state.score.playerScore} | Lose ${state.score.computerScore}`
 }
 
 async function drawSelected(index){
